@@ -29,9 +29,9 @@ public class Guest{
 
     private String email;
 
-    private String phonenumber;
+    private String phoneNumber;
 
-    private LocalDate DateOfBirth;
+    private LocalDate dateOfBirth;
 
     public long getId() {
         return id;
@@ -89,19 +89,19 @@ public class Guest{
         this.email = email;
     }
 
-    public String getPhonenumber() {
-        return phonenumber;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
+    public void setPhoneNumber(String phonenumber) {
+        this.phoneNumber = phonenumber;
     }
 
     public LocalDate getDateOfBirth() {
-        return DateOfBirth;
+        return dateOfBirth;
     }
 
     public void setDateOfBirth(LocalDate dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+        this.dateOfBirth = dateOfBirth;
     }
 }

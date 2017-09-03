@@ -13,12 +13,14 @@ public class GuestController {
     @Autowired
     GuestRepository guestRepository;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Guest> getAll() {
 
         return guestRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.GET)
     public Guest get(@PathVariable long id) {
 
@@ -29,11 +31,13 @@ public class GuestController {
         return guest;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "",method = RequestMethod.POST)
     public void create(@RequestBody Guest guest) {
         guestRepository.save(guest);
     }
 
+    @CrossOrigin(value = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.PUT)
     public void update(@PathVariable long id, @RequestBody Guest updatedGuest) {
         Guest guest = guestRepository.findOne(id);
@@ -43,6 +47,7 @@ public class GuestController {
         guestRepository.save(updatedGuest);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.DELETE)
     public void delete(@PathVariable long id) {
 

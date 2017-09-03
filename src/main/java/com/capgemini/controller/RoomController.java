@@ -13,12 +13,14 @@ public class RoomController {
     @Autowired
     RoomRepository roomRepository;
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "", method = RequestMethod.GET)
     public Iterable<Room> getAll() {
 
         return roomRepository.findAll();
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.GET)
     public Room get(@PathVariable long id) {
 
@@ -29,11 +31,13 @@ public class RoomController {
         return room;
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "",method = RequestMethod.POST)
     public void create(@RequestBody Room room) {
         roomRepository.save(room);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.PUT)
     public void update(@PathVariable long id, @RequestBody Room updatedRoom) {
         Room room = roomRepository.findOne(id);
@@ -43,6 +47,7 @@ public class RoomController {
         roomRepository.save(updatedRoom);
     }
 
+    @CrossOrigin(origins = "*")
     @RequestMapping(value = "{id}/", method = RequestMethod.DELETE)
     public void delete(@PathVariable long id) {
 
