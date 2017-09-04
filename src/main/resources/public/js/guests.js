@@ -40,7 +40,7 @@ function getAll() {
 
 function add() {
 	// Set title
-    $("#title").text("Nieuwe Gast");
+    $("#title").text("New Guest");
 
     // Hide delete button
     $("#deleteBtn").hide();
@@ -69,7 +69,7 @@ function deleteItem() {
 
 function update(id) {
 	// Set title
-    $("#title").text("Bewerk Gast");
+    $("#title").text("Edit Guest");
     
     // Show delete button
     $("#deleteBtn").show();
