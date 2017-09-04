@@ -16,3 +16,4 @@ buildNumber.properties
 .idea/**/tasks.xml
 .idea/dictionaries
 .idea/
+.DS_Store
