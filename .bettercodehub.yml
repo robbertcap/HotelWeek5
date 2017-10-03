@@ -1,0 +1,7 @@
+exclude:
+- /src/main/java/com/capgemini/model/trips/.*
+- /src/main/resources/public/vendor/.*
+component_depth: 1
+languages:
+- java
+- javascript
