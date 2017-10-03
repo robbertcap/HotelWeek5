@@ -1,17 +1,15 @@
 var api = "http://localhost:8080/api/booking/";
-var table = $('#table').DataTable();
-var items = [];
 
 function getAll() {
-    $.get(api, function(data) {
+    $.get(api, function(bookings) {
 
-        if (data == null) throw "NoData";
+        if (bookings == null) throw "NoData";
 
         table.clear();
 
-        for (i = 0; i < data.length; i++) {
+        for (i = 0; i < bookings.length; i++) {
 
-            var item = data[i];
+            var item = bookings[i];
 
             var start = "";
             if (item.start != null) {
@@ -35,7 +33,7 @@ function getAll() {
 
         }
 
-        items = data;
+        items = bookings;
 
         table.draw();
     });
@@ -128,34 +126,5 @@ function save(e) {
     obj.start = $("#start").val();
     obj.end = $("#end").val();
 
-    var uri = api;
-    var method = "POST";
-
-    // Is this an update?
-    if (id == null) {
-        uri = api + obj.id + "/";
-        method = "PUT"
-    }
-
-    // Send data
-    $.ajax({
-        url: uri,
-        type: method,
-        data: JSON.stringify(obj),
-        contentType: "application/json; charset=utf-8"
-    }).then(function() {
-        $("#form").modal('toggle');
-        getAll();
-    });
+    send(api, obj);
 }
-
-function clearForm() {
-    $("input").each(function() {
-        $(this).val("");
-    });
-}
-
-$("#addBtn").click(add);
-$("#saveBtn").click(save);
-$("#deleteBtn").click(deleteItem);
-getAll();

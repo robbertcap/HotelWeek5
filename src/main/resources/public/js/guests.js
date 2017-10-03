@@ -1,17 +1,15 @@
 var api = "http://localhost:8080/api/guest/";
-var table = $('#table').DataTable();
-var items = [];
 
 function getAll() {
-    $.get(api, function(data) {
+    $.get(api, function(guests) {
 
-        if (data == null) throw "NoData";
+        if (guests == null) throw "NoData";
 
         table.clear();
 
-        for (i = 0; i < data.length; i++) {
+        for (i = 0; i < guests.length; i++) {
 
-            var item = data[i];
+            var item = guests[i];
 
             var dateOfBirth = "";
             if (item.dateOfBirth != null) {
@@ -31,7 +29,7 @@ function getAll() {
 
         }
 
-        items = data;
+        items = guests;
 
         table.draw();
     });
@@ -124,34 +122,6 @@ function save(e) {
     obj.phoneNumber = $("#phoneNumber").val();
     obj.dateOfBirth = $("#dateOfBirth").val();
 
-    var uri = api;
-    var method = "POST";
-
-    // Is this an update?
-    if (id == null) {
-        uri = api + obj.id + "/";
-        method = "PUT"
-    }
-
-    // Send data
-    $.ajax({
-        url: uri,
-        type: method,
-        data: JSON.stringify(obj),
-        contentType: "application/json; charset=utf-8"
-    }).then(function() {
-        $("#form").modal('toggle');
-        getAll();
-    });
+    send(api, obj);
 }
 
-function clearForm() {
-    $("input").each(function() {
-        $(this).val("");
-    });
-}
-
-$("#addBtn").click(add);
-$("#saveBtn").click(save);
-$("#deleteBtn").click(deleteItem);
-getAll();

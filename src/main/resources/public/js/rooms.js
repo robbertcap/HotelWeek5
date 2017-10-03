@@ -1,17 +1,15 @@
 var api = "http://localhost:8080/api/room/";
-var table = $('#table').DataTable();
-var items = [];
 
 function getAll() {
-    $.get(api, function(data) {
+    $.get(api, function(rooms) {
 
-        if (data == null) throw "NoData";
+        if (rooms == null) throw "NoData";
 
         table.clear();
 
-        for (i = 0; i < data.length; i++) {
+        for (i = 0; i < rooms.length; i++) {
 
-            var item = data[i];
+            var item = rooms[i];
 
             table.row.add([
                 "<a href=\"javascript:update(" + item.id + ")\">" + item.id + "</a>",
@@ -20,7 +18,7 @@ function getAll() {
 
         }
 
-        items = data;
+        items = rooms;
 
         table.draw();
     });
@@ -94,34 +92,6 @@ function save(e) {
     obj.id = $("#id").val();
     obj.roomType = $("#roomType").val();
 
-    var uri = api;
-    var method = "POST";
-
-    // Is this an update?
-    if (id == null) {
-        uri = api + obj.id + "/";
-        method = "PUT"
-    }
-
-    // Send data
-    $.ajax({
-        url: uri,
-        type: method,
-        data: JSON.stringify(obj),
-        contentType: "application/json; charset=utf-8"
-    }).then(function() {
-        $("#form").modal('toggle');
-        getAll();
-    });
+    send(api, obj);
 }
 
-function clearForm() {
-    $("input").each(function() {
-        $(this).val("");
-    });
-}
-
-$("#addBtn").click(add);
-$("#saveBtn").click(save);
-$("#deleteBtn").click(deleteItem);
-getAll();
